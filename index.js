@@ -13,6 +13,7 @@ module.exports = function(options) {
   options.includeEmptyFields = options.includeEmptyFields || false;
   options.inMemory = options.inMemory || false;
   options.putSingleFilesInArray = options.putSingleFilesInArray || false;
+  options.writeSteamOptions = options.writeSteamOptions || {};
 
   // if the destination directory does not exist then assign uploads to the operating system's temporary directory
   var dest;
@@ -116,7 +117,7 @@ module.exports = function(options) {
         var ws;
 
         if (!options.inMemory) {
-          ws = fs.createWriteStream(newFilePath);
+          ws = fs.createWriteStream(newFilePath, options.writeSteamOptions);
           fileStream.pipe(ws);
         }
 
